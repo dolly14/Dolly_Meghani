@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolly Meghani — Product Manager Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --white: #f8f5f0;
+    --cream: #f0ebe2;
+    --bumble: #FFD600;
+    --bumble-dark: #e6be00;
+    --accent: #1a1a2e;
+    --muted: #6b6660;
+    --border: rgba(13,13,13,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(248,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 5rem;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--bumble); color: var(--black);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em;
+    padding: 0.35rem 0.9rem; border-radius: 2rem;
+    margin-bottom: 2rem; width: fit-content;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--muted);
+  }
+  .hero-sub {
+    font-size: 1rem; color: var(--muted);
+    line-height: 1.7; max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--black); color: var(--white);
+    padding: 0.8rem 1.8rem; border-radius: 0.4rem;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-outline {
+    background: transparent; color: var(--black);
+    padding: 0.8rem 1.8rem; border-radius: 0.4rem;
+    border: 1.5px solid var(--black);
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--black); color: var(--white); }
+
+  .hero-right {
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-graphic {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .phone-mock {
+    width: 200px; height: 380px;
+    background: #1e1e3a;
+    border-radius: 32px;
+    border: 2px solid rgba(255,214,0,0.3);
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    z-index: 2;
+    overflow: hidden;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    padding: 1.2rem 0.8rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .phone-header {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em;
+    color: var(--bumble); text-align: center; margin-bottom: 0.3rem;
+  }
+  .phone-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px; flex: 1;
+  }
+  .grid-dot {
+    background: rgba(255,214,0,0.15);
+    border-radius: 50%; aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem;
+    color: rgba(255,214,0,0.6);
+    border: 1px solid rgba(255,214,0,0.1);
+    animation: pulse-dot 3s ease-in-out infinite;
+  }
+  .grid-dot.active {
+    background: rgba(255,214,0,0.3);
+    color: var(--bumble);
+    border-color: rgba(255,214,0,0.4);
+  }
+  .grid-dot:nth-child(1) { animation-delay: 0s; }
+  .grid-dot:nth-child(3) { animation-delay: 0.4s; }
+  .grid-dot:nth-child(5) { animation-delay: 0.8s; }
+  .grid-dot:nth-child(7) { animation-delay: 1.2s; }
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+  .phone-tabs {
+    display: flex; justify-content: space-around;
+    padding: 0.5rem 0 0.3rem;
+    border-top: 1px solid rgba(255,214,0,0.1);
+    margin-top: auto;
+  }
+  .tab-item {
+    font-size: 0.45rem; color: rgba(255,255,255,0.4);
+    text-align: center; display: flex; flex-direction: column;
+    align-items: center; gap: 2px;
+  }
+  .tab-item.active { color: var(--bumble); }
+  .tab-dot { width: 14px; height: 14px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem;
+  }
+  .tab-item.active .tab-dot { background: rgba(255,214,0,0.2); }
+
+  .floating-card {
+    position: absolute; background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,214,0,0.2);
+    border-radius: 12px; padding: 0.7rem 1rem;
+    color: white; font-size: 0.7rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  .floating-card.card1 { top: 20%; right: 8%; animation-delay: 0s; }
+  .floating-card.card2 { bottom: 28%; left: 6%; animation-delay: 2s; }
+  .fc-label { font-size: 0.55rem; color: rgba(255,214,0,0.7); font-weight: 600; margin-bottom: 2px; }
+  .fc-val { font-weight: 600; color: white; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .bg-circles {
+    position: absolute; inset: 0; overflow: hidden; z-index: 0;
+  }
+  .bg-circle {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,214,0,0.08), transparent);
+  }
+  .bg-circle.c1 { width: 300px; height: 300px; top: -50px; right: -50px; }
+  .bg-circle.c2 { width: 200px; height: 200px; bottom: 100px; left: 50px; }
+
+  /* SECTION SHARED */
+  section { padding: 6rem 5rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.2; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  /* ABOUT */
+  .about-section { background: var(--cream); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center; margin-top: 3rem;
+  }
+  .about-text p {
+    font-size: 1rem; line-height: 1.8; color: #333;
+    margin-bottom: 1.2rem;
+  }
+  .skills-block { display: flex; flex-direction: column; gap: 1rem; }
+  .skill-row { display: flex; align-items: center; gap: 1rem; }
+  .skill-name {
+    font-size: 0.8rem; font-weight: 500; width: 160px; flex-shrink: 0;
+  }
+  .skill-bar { flex: 1; height: 4px; background: rgba(0,0,0,0.08); border-radius: 2px; }
+  .skill-fill { height: 100%; border-radius: 2px; background: var(--black); }
+
+  /* CASE STUDY */
+  .case-section { background: var(--white); }
+  .case-hero-banner {
+    background: var(--accent);
+    border-radius: 1.5rem; padding: 3rem; margin: 3rem 0 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .case-banner-left h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--white);
+    margin-bottom: 0.8rem; line-height: 1.2;
+  }
+  .case-banner-left p { color: rgba(248,245,240,0.65); font-size: 0.95rem; line-height: 1.7; }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+  .case-tag {
+    background: rgba(255,214,0,0.15); color: var(--bumble);
+    border: 1px solid rgba(255,214,0,0.25);
+    padding: 0.3rem 0.8rem; border-radius: 2rem;
+    font-size: 0.72rem; font-weight: 500;
+  }
+  .case-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,214,0,0.15);
+    border-radius: 1rem; padding: 1.2rem;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--bumble);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+  /* CONTENT BLOCKS */
+  .content-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 2.5rem;
+  }
+  .content-block {
+    background: var(--cream); border-radius: 1rem; padding: 2rem;
+    border: 1px solid var(--border);
+  }
+  .content-block h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .block-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--bumble); display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .content-block p, .content-block li {
+    font-size: 0.9rem; line-height: 1.75; color: #444;
+  }
+  .content-block ul { padding-left: 1.2rem; }
+  .content-block li { margin-bottom: 0.4rem; }
+
+  /* PERSONA CARDS */
+  .persona-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .persona-card {
+    border: 1px solid var(--border); border-radius: 1rem;
+    padding: 1.8rem; background: var(--white);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .persona-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .persona-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--bumble); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 1rem;
+  }
+  .persona-name { font-weight: 600; margin-bottom: 0.3rem; }
+  .persona-intent { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.8rem; }
+  .persona-jtbd {
+    font-size: 0.82rem; line-height: 1.65; color: #444;
+    padding: 0.8rem; background: var(--cream); border-radius: 0.6rem;
+  }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .feature-card {
+    padding: 1.8rem; border: 1px solid var(--border);
+    border-radius: 1rem; background: var(--white);
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: var(--bumble); }
+  .feature-emoji { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .feature-card h4 { font-weight: 600; margin-bottom: 0.5rem; }
+  .feature-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* USER TESTING */
+  .testing-section { background: var(--cream); }
+  .test-grid {
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 3rem; margin-top: 3rem; align-items: start;
+  }
+  .test-numbers { display: flex; flex-direction: column; gap: 1.2rem; }
+  .test-num-card {
+    background: var(--white); border-radius: 1rem;
+    padding: 1.5rem; text-align: center;
+    border: 1px solid var(--border);
+  }
+  .test-big { font-family: 'DM Serif Display', serif; font-size: 2.4rem; }
+  .test-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
+  .quotes-col { display: flex; flex-direction: column; gap: 1.2rem; }
+  .quote-card {
+    background: var(--white); border-radius: 1rem;
+    padding: 1.5rem 1.8rem;
+    border-left: 3px solid var(--bumble);
+  }
+  .quote-text {
+    font-size: 0.92rem; line-height: 1.7; color: #333;
+    font-style: italic; margin-bottom: 0.5rem;
+  }
+  .quote-attr { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+
+  /* METRICS */
+  .metrics-section { background: var(--accent); }
+  .metrics-section .section-label { color: rgba(255,214,0,0.7); }
+  .metrics-section .section-title { color: var(--white); }
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .metric-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,214,0,0.15);
+    border-radius: 1rem; padding: 2rem;
+    text-align: center; transition: background 0.2s;
+  }
+  .metric-card:hover { background: rgba(255,214,0,0.08); }
+  .metric-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; color: var(--bumble);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .metric-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* OUTCOMES */
+  .outcomes-section { background: var(--white); }
+  .keep-remove {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 2.5rem;
+  }
+  .or-card { border-radius: 1rem; padding: 2rem; }
+  .or-card.keep { background: #f0faf4; border: 1px solid #b7e4c7; }
+  .or-card.remove { background: #fff5f5; border: 1px solid #ffc0c0; }
+  .or-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .or-card.keep .or-label { color: #2d6a4f; }
+  .or-card.remove .or-label { color: #c0392b; }
+  .or-item {
+    font-size: 0.88rem; line-height: 1.7; color: #333;
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex; gap: 0.6rem;
+  }
+  .or-item:last-child { border-bottom: none; }
+  .or-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .keep .or-dot { background: #2d6a4f; }
+  .remove .or-dot { background: #c0392b; }
+
+  /* EXPERIENCE STRIP */
+  .exp-section { background: var(--cream); }
+  .exp-timeline { margin-top: 3rem; position: relative; }
+  .exp-timeline::before {
+    content: ''; position: absolute; left: 120px; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .exp-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 2.5rem; padding: 0 0 2.5rem 0;
+    position: relative;
+  }
+  .exp-item::after {
+    content: ''; position: absolute;
+    left: 113px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bumble); border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--bumble);
+  }
+  .exp-date { font-size: 0.75rem; color: var(--muted); text-align: right; padding-top: 4px; }
+  .exp-content h4 { font-weight: 600; margin-bottom: 0.2rem; }
+  .exp-company { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.7rem; }
+  .exp-desc { font-size: 0.88rem; line-height: 1.7; color: #444; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); color: var(--white);
+    padding: 4rem 5rem; text-align: center;
+  }
+  footer h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; margin-bottom: 1rem;
+  }
+  footer p { color: rgba(255,255,255,0.5); margin-bottom: 2rem; }
+  .footer-links { display: flex; gap: 1rem; justify-content: center; }
+  .footer-link {
+    padding: 0.7rem 1.5rem; border-radius: 0.4rem;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .footer-link.primary { background: var(--bumble); color: var(--black); }
+  .footer-link.primary:hover { background: var(--bumble-dark); }
+  .footer-link.sec { border: 1px solid rgba(255,255,255,0.2); color: white; }
+  .footer-link.sec:hover { background: rgba(255,255,255,0.08); }
+  .footer-copy { margin-top: 3rem; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left { padding: 3rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid, .content-grid, .keep-remove, .case-hero-banner, .test-grid { grid-template-columns: 1fr; }
+    .persona-row, .features-grid, .metrics-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Dolly Meghani</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#casestudy">Case Study</a>
+    <a href="#testing">User Research</a>
+    <a href="#metrics">Metrics</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <div class="hero-tag">📋 PM Portfolio</div>
+    <h1 class="hero-title">
+      Product Manager<br><em>with a Finance &</em><br>Tech Edge
+    </h1>
+    <p class="hero-sub">
+      9+ years at Deloitte delivering SAP Finance products globally. Now bringing that end-to-end product instinct — requirements, research, roadmap, and launch — into digital product management.
+    </p>
+    <div class="hero-cta">
+      <a href="#casestudy" class="btn-primary">View Case Study →</a>
+      <a href="https://www.linkedin.com/in/dolly-meghani/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="bg-circles">
+      <div class="bg-circle c1"></div>
+      <div class="bg-circle c2"></div>
+    </div>
+    <div class="hero-graphic">
+      <div class="floating-card card1">
+        <div class="fc-label">Match-to-Meetup</div>
+        <div class="fc-val">30% Target</div>
+      </div>
+      <div class="phone-mock">
+        <div class="phone-screen">
+          <div class="phone-header">◎ NearMe · LIVE</div>
+          <div class="phone-grid">
+            <div class="grid-dot active">👤</div>
+            <div class="grid-dot">·</div>
+            <div class="grid-dot active">👤</div>
+            <div class="grid-dot">·</div>
+            <div class="grid-dot active">👤</div>
+            <div class="grid-dot">·</div>
+            <div class="grid-dot active">👤</div>
+            <div class="grid-dot">·</div>
+            <div class="grid-dot">·</div>
+          </div>
+          <div class="phone-tabs">
+            <div class="tab-item"><div class="tab-dot">⚡</div><span>Pulse</span></div>
+            <div class="tab-item active"><div class="tab-dot">📍</div><span>NearMe</span></div>
+            <div class="tab-item"><div class="tab-dot">✨</div><span>Moments</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-card card2">
+        <div class="fc-label">User Testing</div>
+        <div class="fc-val">8 Users · 100% Usability</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-label">About Me</div>
+  <div class="section-title">Bridging Finance, Tech,<br>and Product Thinking</div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a product professional transitioning into Product Management after 9+ years at Deloitte, where I led end-to-end delivery of SAP Finance integrations across 10+ global member firms — from requirements and blueprinting to development, UAT, and hypercare.</p>
+      <p>Currently driving a <strong>direct-pay transformation project</strong> at Deloitte Canada as Sr. Financial Analyst — defining requirements, aligning finance and tech stakeholders, redesigning processes end-to-end, and providing hands-on end-user support.</p>
+      <p>I recently completed a <strong>Product Management certification from CircuitStream × University of Toronto</strong>, where I built the NearMe case study you'll find below — from market research to PRD to Figma prototype to user testing.</p>
+    </div>
+    <div class="skills-block fade-in">
+      <div class="skill-row"><span class="skill-name">Product Roadmapping</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Stakeholder Management</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">User Research & Testing</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">SAP Finance / Concur</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Agile / SAFe</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">PRD & Documentation</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">ABAP Development</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-name">Figma Prototyping</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section" id="casestudy">
+  <div class="section-label">Case Study · PM Certification Capstone</div>
+  <div class="section-title">NearMe for Bumble</div>
+
+  <div class="case-hero-banner fade-in">
+    <div class="case-banner-left">
+      <h2>A Proximity-Based Discovery Feature for Bumble Dating & BFF</h2>
+      <p>A full product case study: market research, problem definition, PRD, Figma prototype, and structured user testing with 8 participants. NearMe helps users convert digital matches into real-world meetups — faster, safer, and with full consent control.</p>
+      <div class="case-tags">
+        <span class="case-tag">Consumer Mobile</span>
+        <span class="case-tag">Location & Privacy</span>
+        <span class="case-tag">Freemium Monetization</span>
+        <span class="case-tag">User Research</span>
+        <span class="case-tag">PRD · Figma</span>
+      </div>
+    </div>
+    <div class="case-stats">
+      <div class="stat-card">
+        <div class="stat-num">$10.3B</div>
+        <div class="stat-label">Global online dating market (2024)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">381M</div>
+        <div class="stat-label">Global dating app users (2024)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">11 days</div>
+        <div class="stat-label">Avg. match-to-meetup — the gap NearMe closes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">User testers rated NearMe "easy to use"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problem + Solution -->
+  <div class="content-grid fade-in">
+    <div class="content-block">
+      <h3><span class="block-icon">🔍</span> The Problem</h3>
+      <p>Dating app users consistently struggle to convert digital matches into real-world interactions. Despite high match volumes, most conversations fail to progress to an in-person meeting — creating fatigue and churn.</p>
+      <ul style="margin-top:1rem">
+        <li>Average of 20+ messages exchanged before a date is suggested</li>
+        <li>11-day average lag from match to first date</li>
+        <li>Competing proximity tools (Tinder Radar, Happn) lack consent-based safety mechanisms</li>
+        <li>Urban users share physical spaces with compatible matches daily — and never know it</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="block-icon">💡</span> The Solution</h3>
+      <p>NearMe is a consent-based, proximity discovery feature for Bumble's Dating and BFF modes. Users must explicitly opt in to share their location — and can only view others who have also consented.</p>
+      <ul style="margin-top:1rem">
+        <li>Approximate locations shown on a grid — never pinned on a map</li>
+        <li>Visibility is strictly reciprocal and time-limited</li>
+        <li>Three sub-features: Pulse (browse nearby), Moments (broadcast presence), Spark (alert when a match is nearby)</li>
+        <li>Freemium model: limited access for free users, unlimited for premium</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Personas -->
+  <div style="margin-top:4rem" class="fade-in">
+    <div class="section-label">User Personas</div>
+    <div class="section-title" style="font-size:1.6rem">Who NearMe Is Built For</div>
+    <div class="persona-row">
+      <div class="persona-card">
+        <div class="persona-avatar">☕</div>
+        <div class="persona-name">Amin, 35</div>
+        <div class="persona-intent">Social & Spontaneous</div>
+        <div class="persona-jtbd">Thrives in cafés and events. Wants to discover who's nearby right now — not after 11 days of messaging. NearMe Moments lets him broadcast his presence at a venue.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar">🎧</div>
+        <div class="persona-name">Reya, 26</div>
+        <div class="persona-intent">Introverted Commuter</div>
+        <div class="persona-jtbd">Finds it socially awkward to approach strangers she sees on her daily commute. Pulse lets her connect with nearby users sharing her interests — without the pressure of cold approach.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar">⚡</div>
+        <div class="persona-name">Vivian, 30</div>
+        <div class="persona-intent">High-Match, Low-Convert</div>
+        <div class="persona-jtbd">Matches pile up but conversations stall. Spark notifies him when a matched interest enters his proximity — turning a stalled chat into a spontaneous meetup opportunity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div style="margin-top:4rem" class="fade-in">
+    <div class="section-label">Core Features</div>
+    <div class="section-title" style="font-size:1.6rem">What NearMe Delivers</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-emoji">📡</div>
+        <h4>Pulse</h4>
+        <p>Browse a proximity grid of nearby users who've consented to share their location. Profiles show thumbnail, name, age, interests, and approximate distance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">✨</div>
+        <h4>Moments</h4>
+        <p>Broadcast your presence at a location for a time-limited session. Nearby users can discover you and send a "Say Hello" tap to initiate connection.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">⚡</div>
+        <h4>Spark</h4>
+        <p>Get notified when an existing match enters your proximity. Reduces the 11-day avg match-to-meetup lag to under 5 days with a contextual nudge.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🔒</div>
+        <h4>Consent Toggle</h4>
+        <p>A prominent opt-in toggle with clear confirmation dialog. Location sharing is never on by default — fully reciprocal and auto-times out.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">⚙️</div>
+        <h4>Location Timeout</h4>
+        <p>Users set their own sharing window (30 min, 1 hr, etc.). System auto-disables when the timer expires — no forgotten visibility.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">💎</div>
+        <h4>Freemium Monetization</h4>
+        <p>Free users get limited proximity interactions per time window. Premium subscribers get unlimited access — creating a clear upgrade incentive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USER TESTING -->
+<section class="testing-section" id="testing">
+  <div class="section-label">User Research</div>
+  <div class="section-title">Testing With Real Users</div>
+  <div class="test-grid fade-in">
+    <div class="test-numbers">
+      <div class="test-num-card">
+        <div class="test-big">8</div>
+        <div class="test-desc">Total participants tested</div>
+      </div>
+      <div class="test-num-card">
+        <div class="test-big">4♀ 4♂</div>
+        <div class="test-desc">Gender balanced sample</div>
+      </div>
+      <div class="test-num-card">
+        <div class="test-big">26–36</div>
+        <div class="test-desc">Age range · target demographic</div>
+      </div>
+      <div class="test-num-card">
+        <div class="test-big">75%</div>
+        <div class="test-desc">Would pay for or consider premium</div>
+      </div>
+      <div class="test-num-card">
+        <div class="test-big">100%</div>
+        <div class="test-desc">Said NearMe would increase Bumble usage vs. competitors</div>
+      </div>
+    </div>
+    <div class="quotes-col">
+      <div style="margin-bottom:0.5rem; font-size:0.85rem; color:var(--muted); font-weight:500;">Participant Feedback</div>
+      <div class="quote-card">
+        <div class="quote-text">"Love that this feature serves all psychological category people — the shy ones, the outgoing ones and the ones who like to have a quick chat."</div>
+        <div class="quote-attr">EUT-6 · Consultant</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"I wish the Moments feature existed — several times I need company and people don't turn up."</div>
+        <div class="quote-attr">EUT-1 · Software Developer</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"The feature is very easy to use and the design is simple even for a non-tech person."</div>
+        <div class="quote-attr">EUT-3 · Insurance Professional</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">"I wouldn't like a streak feature as I don't use dating apps to build scores."</div>
+        <div class="quote-attr">EUT-2 · Biotechnology</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keep vs Remove -->
+  <div style="margin-top:3rem" class="fade-in">
+    <div class="section-label">Research Outcomes</div>
+    <div class="section-title" style="font-size:1.6rem">What We Kept, What We Cut</div>
+    <div class="keep-remove">
+      <div class="or-card keep">
+        <div class="or-label">✅ Implemented Based on Feedback</div>
+        <div class="or-item"><div class="or-dot"></div><span>Grid-based approximate locations (not map pins) for safety and privacy</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Default location timeout to prevent forgotten visibility</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>User-configurable radius distance setting</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Thumbnail previews on Moments cards for profile context</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Moments in Dating mode hides profiles of users who've expressed interest (group view for BFF only)</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Max 5 users per Moments group to contain security risk</span></div>
+      </div>
+      <div class="or-card remove">
+        <div class="or-label">❌ Removed Based on Feedback</div>
+        <div class="or-item"><div class="or-dot"></div><span>Shared Routes feature — raised concerns about app storing frequented locations</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Location broadcast to other users — stalking and screenshot-sharing risk</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Streak/gamification scoring — users felt it conflicted with dating intent</span></div>
+        <div class="or-item"><div class="or-dot"></div><span>Repeated profile display after like/dislike action on Spark</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics-section" id="metrics">
+  <div class="section-label">Success Metrics</div>
+  <div class="section-title">North Star & Launch Targets</div>
+  <div class="metrics-grid fade-in">
+    <div class="metric-card">
+      <div class="metric-num">30%</div>
+      <div class="metric-label">North Star: Match-to-Meetup conversion rate within 90 days (vs ~18% industry avg)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">&lt;5 days</div>
+      <div class="metric-label">Spark match-to-meetup timeline target (vs 11-day industry average)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">60%</div>
+      <div class="metric-label">Pulse map interaction rate target within 90 days</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">35%</div>
+      <div class="metric-label">Moments → message-initiated rate (broadcast triggers real conversation)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">&lt;0.5%</div>
+      <div class="metric-label">Safety report rate during Beta — protecting trust and platform integrity</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">~8%</div>
+      <div class="metric-label">Pro conversion lift target from proximity feature as premium driver</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="section-label">Professional Experience</div>
+  <div class="section-title">9+ Years Delivering at Deloitte</div>
+  <div class="exp-timeline fade-in">
+    <div class="exp-item">
+      <div class="exp-date">2022–Present</div>
+      <div class="exp-content">
+        <h4>Sr. Financial Analyst — Concur Expense Management</h4>
+        <div class="exp-company">Deloitte Management Service LP · Toronto, ON</div>
+        <div class="exp-desc">Leading direct-pay transformation project — defining requirements, aligning finance and tech teams, redesigning processes end-to-end with stakeholder and end-user support. Own expense audit and reconciliation for Deloitte Canada Finance.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2019–2022</div>
+      <div class="exp-content">
+        <h4>Sr. Analyst & ABAP Developer — SAP Finance Integrations</h4>
+        <div class="exp-company">Deloitte Support Services India · Bengaluru</div>
+        <div class="exp-desc">Led end-to-end SDLC for Rydoo–SWIFT and Concur–SWIFT integrations across France, Taiwan, Israel, US, Netherlands, Belgium. Ran SAFe Agile ceremonies, managed Azure DevOps backlog, coached team members.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2016–2019</div>
+      <div class="exp-content">
+        <h4>Analyst — SAP HCM Quality Assurance</h4>
+        <div class="exp-company">Deloitte Support Services India · Bengaluru</div>
+        <div class="exp-desc">Designed and executed test strategy for Deloitte US Compensation project impacting 96,000+ users across SAP HCM modules including Personnel Administration, Compensation, and Benefits.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <h2>Let's Connect</h2>
+  <p>Open to Product Manager roles in financial systems, eCommerce, ERP transformation, or enterprise SaaS.</p>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dolly-meghani/" target="_blank" class="footer-link primary">LinkedIn ↗</a>
+    <a href="mailto:dollymeghani14@gmail.com" class="footer-link sec">dollymeghani14@gmail.com</a>
+  </div>
+  <div class="footer-copy">© 2026 Dolly Meghani · Product Manager Portfolio</div>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
